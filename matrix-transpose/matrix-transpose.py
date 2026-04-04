@@ -2,16 +2,22 @@ import numpy as np
 
 def matrix_transpose(A):
     """
-    Return the transpose of matrix A (swap rows and columns).
+    Return the transpose of matrix A without using np.transpose or .T
     """
-    A = np.array(A) 
+    A = np.array(A)
     
-    N, M = A.shape  
+    # Handle edge case: empty matrix
+    if A.size == 0:
+        return np.array(A)
     
-    result = np.zeros((M, N), dtype=A.dtype)
+    N, M = A.shape
     
-    for i in range(N):
-        for j in range(M):
-            result[j][i] = A[i][j]
+    # Initialize result matrix
+    result = np.empty((M, N), dtype=A.dtype)
+    
+    # Manual transpose
+    for j in range(M):
+        for i in range(N):
+            result[j, i] = A[i, j]
     
     return result
